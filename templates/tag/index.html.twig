@@ -1,0 +1,124 @@
+
+{% extends 'layout/template.html.twig' %}
+
+{% block title %}Tags list{% endblock %}
+
+{% block body %}
+    {%  for message in app.session.flashBag.get('info')  %}
+        <div class="alert alert-info">
+            <strong>Info !</strong> {{message}}.
+        </div>
+    {% endfor %}
+    {%  for message in app.session.flashBag.get('success')  %}
+        <div class="alert alert-success">
+            <strong>{{tagname}} !</strong> {{message}}.
+        </div>
+    {% endfor %}
+    {%  for message in app.session.flashBag.get('error')  %}
+        <div class="alert alert-danger">
+            <strong>Attention !</strong> {{message}}.
+        </div>
+    {% endfor %}
+
+    {# --- Registration Modale --- #}
+    <div class="container">
+
+        <!-- The Modal -->
+        <div class="modal fade" id="Registration">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header bg-primary">
+                        <h4 class="modal-title text-white">Créer un nouveau tag</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        {{ include('tag/_form.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+
+    <div class="app-title">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="breadcomb-wp">
+					<div class="breadcomb-icon">
+						<i class="mdi mdi-arrange-send-to-back"></i>
+					</div>
+					<div class="breadcomb-ctn">
+						<h2>Tags</h2>
+						<p>Table de tous les Tags <span class="bread-ntd">active</span></p>
+					</div>
+				</div>
+            </div>
+        </div>
+        <ul class="app-breadcrumb breadcrumb">
+            <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+            <li class="breadcrumb-item"><a href="#">Tags</a></li>
+        </ul>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="product-status-wrap">
+                <div class="table-responsive">
+                    <h4><code>{{ nb }}</code> - tags</h4>
+                    <div class="add-product">
+                        <a class="nav-link btn btn-success text-white" data-toggle="modal" data-target="#Registration">+ Créer</a>
+                    </div><hr>
+                    {% if nb != 0 %}
+                    <table class="table table-hover" id="sampleTable">
+                            <thead>
+                                <tr>
+                                    <th>NOM DU TAG</th>
+                                    <th>CONTACTS INSCRITS AUJOURD'HUI</th>
+                                    <th>CONTACTS INSCRITS HIER</th>
+                                    <th>TOTAL DE CONTACTS INSCRITS</th>
+                                    <th>TOTAL DE CONTACTS DESINSCRITS</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for tag in tags %}
+                                    <tr id="{{ tag.id }}">
+                                        <td>
+                                            <h6><a href="#">{{ tag.name }}</a></h6>
+                                            
+                                        </td>
+                                        <td>{{ tag.inscritsAujourdhui }}</td>
+                                        <td>{{ tag.inscritsHier }}</td>
+                                        <td>{{ tag.totalInscrits }}</td>
+                                        <td>{{ tag.totalDesinscrits }}</td>
+                                        <td>
+                                            <a href="{{ path('app_tag_edit', {'id': tag.id}) }}"><i style="font-size:20px" class="mdi mdi-arrow-right-bold-circle-outline"></i></a>
+                                        </td>
+                                    </tr>
+                                    
+                                {% endfor %}
+                            </tbody>
+                    </table>
+                    {% else %}
+                        <table>
+                            <tr>
+                                <td colspan="6">
+                                    <div style="margin:10% 25%;">
+                                    <i style="font-size:50px;display:flex;justify-content:center" class="mdi mdi-book-open-variant"></i>
+                                    <h5 style="text-align:center" class="">Oups !</h5>
+                                </div>
+                                </td>
+                            </tr>
+                        </table>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/test/js/process.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,93 @@
+.breadcome-list {
+    padding:15px;
+	background:#191c24;
+	margin-bottom:5px;
+    top: 0;
+}
+.breadcomb-wp {
+    display: flex;
+}
+.breadcomb-icon i {
+    font-size: 20px;
+    color: #aab2bd;
+    padding: 15px;
+    position: relative;
+    border-radius: 5px;
+    border-bottom: 1px solid #aab2bd;
+    border-top: 1px solid #aab2bd;
+    display: block;
+    border-left: 1px solid #aab2bd;
+}
+.breadcomb-ctn {
+    margin-left: 20px;
+}
+.breadcomb-ctn h2, 
+.breadcomb-ctn h6{
+	font-size:20px;
+	color:#aab2be;
+}
+.breadcomb-ctn p{
+	font-size:14px;
+	color:#aab2bd;
+	margin:0px;
+}
+
+
+.add-product {
+    border-bottom: 1px solid #6c7293;
+}
+.add-product a {
+    float: right;
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    /*background: #152036;*/
+    padding: 6px 20px;
+    color: #fff;
+    border-radius: 4px;
+}
+.product-status-wrap{
+	padding:20px;
+	/*background:#1b2a47;*/
+    background: #191c24;
+}
+.product-status-wrap h4 {
+    font-size: 17px;
+    color: #6c7293;
+    margin-bottom: 20px;
+}
+.product-status-wrap table {
+    width: 100%;
+}
+.product-status-wrap table th {
+    padding: 15px 5px;
+    vertical-align: top;
+    border-top: 1px solid rgba(128, 128, 128, 0.192);
+}
+.product-status-wrap table th {
+    vertical-align: bottom;
+    /*border-bottom: 2px solid rgba(128, 128, 128, 0.192);
+	background-color:#2A3038;*/
+    color: #6c7293;
+}
+.product-status-wrap th, .product-status-wrap td {
+    padding: 5px;
+    text-align: left;
+    font-size: 14px;
+}
+.product-status-wrap table td {
+    padding: 9px 7px;
+    border-top: 1px solid rgba(128, 128, 128, 0.192);
+	/*color:#bacbe6*/;
+    /*color: #aab2bd;*/
+    color: #6c7293;
+	font-size:14px;
+}
+
+table.table > tbody > tr:hover {
+    background: #111;
+}
+table.table > tbody > tr > td > a {
+    text-decoration: none;
+    font-size: 14px;
+}

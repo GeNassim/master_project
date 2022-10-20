@@ -1,0 +1,17 @@
+{{ form_start(form) }}
+    <div class="form-group">
+        {{ form_row(form.name) }}
+    </div>
+    <div class="form-group">
+        {{ form_row(form.description) }}
+    </div>
+    <div class="form-group">
+        {{ form_row(form.active) }}
+    </div>
+    <div class="tile-footer">
+        {{ form_widget(form) }}
+        <button class="btn btn-primary">{{ button_label|default('Sauvegarder la campagne') }}</button>
+            &nbsp;&nbsp;&nbsp;
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+    </div>
+{{ form_end(form) }}

@@ -1,0 +1,68 @@
+{% extends "layout/template.html.twig" %}
+
+{% block title %}documentation{% endblock %}
+
+{% block body %}
+
+    <div class="app-title">
+        <div>
+            <h1><i class="fa fa-file-code-o"></i> Documentation</h1>
+            <p>Documentation de l'application</p>
+        </div>
+        <ul class="app-breadcrumb breadcrumb">
+            <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+            <li class="breadcrumb-item"><a href="#">Documentation</a></li>
+        </ul>
+    </div>
+
+    <div class="tile">
+        <div class="tile-body" style="color:#ffff">
+            <div class="docs" style="max-width: 700px;">
+
+                <h2 class="docs-title" id="Compilation-of-source-files">Presentation du système</h2>
+                <p>
+                Le but de notre projet, consiste à créer un système de vente automatisé qui vente pour le e-commerçant sans aucune action de la part de l'utilisateur.
+                . </p>
+                <p>Et que la seule chose qu'on a à faire au finale c'est de créer le système, le concevoir et le lancer. Une fois qu'il est lancé, on a plus rien à faire. C'est lui qui se charge de travailler pour l'utilisateur. Pour cela il faut être capable de mettre en place <code>la configuration effective de l'environnement SEA Concept</code>.</p>
+                <h2 class="docs-title" id="Layout-Customization">Configuration effective de l'environnement SEA Concept</h2>
+                <p>La strategie est basé sur la séquence de communication automatisé par e-mail. Pour que les gens puisse comprendre qui on est, rechauffer l'audience pour qu'on puisse developper de l'expertise, de la confiance de la transparence
+                <h4><code>Configuration de l'environnement.</code></h4>
+                <p>Apres avoir acceder sur la plateforme, on commence par le plus important qui est le <code>client</code></p>
+                <ol>
+                    <li><code>Gérer des tags</code>.</li>
+                    <p>C'est grace au tag qui va permettre d'automatiser toute la suite de l'automation</p>
+                    <p>Dans la rubrique <code> Contacts</code> on va sur <code> Gérer les tags</code>. Cliquez sur <code>Créer</code> et choisir comme nom de tag, l'offre en promotion.
+                    Dans mon cas c'est <code>Accès Ebook gratuit</code></p>
+                    <li><code>Programmation de séquence automatisé</code> .</li>
+                    <p>Dans la rubrique <code> Boites aux lettre</code> on va sur <code> Campagnes</code>. On peut créer une nouvelle campagne en faisant <code>Créer</code> et choisir comme nom de la campagne comme on le souhaite.
+                    Dans mon cas c'est <code>Campagne Nouveaux Abonnés</code> avec une petite description de la campagne</p>
+                    <p>Une fois que cela est fait, il nous suffit maintenant d'ouvrir la campagne en cliquant sur le nom de la campagne et commencer à programmer la séquence des e-mails automatisé sur le bouton <code>Créer une étape</code></p>
+                    <p>Une étape, s'agit d'email envoyé à un instant t, par rapport à un email envoyé à un instant t-1.</p>
+                
+                    <li><code>Créer un tunnel de vente</code> .</li>
+                    <p>
+                        Dans la rubrique <code> Tunnel de vente, </code>on fait <code>Créer un tunnel</code>
+                        choisir le nom tunnel à créer puis cliquer au dessus du nom du tunnel et commencer à faire quelques parametres.
+                    .</p>
+                    <p>
+                        Sur cette nouvelle page, on a <code>2</code> boutons. <code>Parametres et Regles d'automatisation</code>
+                    </p>
+                    <p>
+                        <code>Parametres</code> consiste à donner un nom de la page à promotionner, c'est le cas de <code>Nom de l'étape</code><br>
+                        ainsi de definir son chemin d'accès. Autrement dit <code>l'url</code>. Le visuel est le lien de partage du produit en promotion<br>
+                        On peut copier ce lien dans un navigateur pour voir, à quoi ça donne.
+                    </p>
+                    <p>
+                        <code>Regles d'automatisation</code> consiste à selectionner <code>campagne</code> et <code>le tag</code>
+                        pour lesquels <code>le tunnel est lié.</code>
+                    </p>
+                    <p><code>Important : </code> Le tunnel ne sera pas automatisé, si on l'a pas associé une campagne et un tag</p>
+                </ol>
+                </p>
+
+                <p><span>Remarque : <span> Le cas ici on a déjà une page déja conçu pour l'exemple. Peut importe le nombre de tunnel crée, on peut avoir différent chemin d'accès mais la page en promotion sera la même. Des améliorations pour les jours à venir sont requises.</p>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

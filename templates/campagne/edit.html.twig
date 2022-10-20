@@ -1,0 +1,35 @@
+{% extends "layout/template.html.twig" %}
+
+{% block title %}Edit Campagne{% endblock %}
+
+{% block body %}
+    <div class="app-title">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="breadcomb-wp">
+					<div class="breadcomb-icon">
+						<i class="icon nalika-home"></i>
+					</div>
+					<div class="breadcomb-ctn">
+						<h2>Campagnes Version --</h2>
+						<p>Edition de la <span class="bread-ntd">campagne</span></p>
+					</div>
+				</div>
+            </div>
+        </div>
+        <ul class="app-breadcrumb breadcrumb">
+            <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+            <li class="breadcrumb-item"><a href="{{ path('app_campagne_index') }}">Mes campagnes</a></li>
+        </ul>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="product-status-wrap">
+                {{ include('campagne/_form.html.twig', {'button_label': 'Actualiser'}) }}
+            </div>
+        </div>
+    </div>
+
+    {{ include('campagne/_delete_form.html.twig') }}
+{% endblock %}

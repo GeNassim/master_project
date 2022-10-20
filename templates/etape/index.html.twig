@@ -1,0 +1,90 @@
+{% extends 'layout/template.html.twig' %}
+
+{% block title %} Etapes - {{campagne.name}}{% endblock %}
+
+{% block body %}
+
+    {%  for message in app.session.flashBag.get('info')  %}
+        <div class="alert alert-info">
+            <strong>Info !</strong> {{message}}.
+        </div>
+    {% endfor %}
+    {%  for message in app.session.flashBag.get('success')  %}
+        <div class="alert alert-success">
+            <strong>Succès !</strong> {{message}}.
+        </div>
+    {% endfor %}
+    {%  for message in app.session.flashBag.get('error')  %}
+        <div class="alert alert-danger">
+            <strong>Attention !</strong> {{message}}.
+        </div>
+    {% endfor %}
+    <div class="app-title">
+        <div>
+          <h5><i class="fa fa-th-list">&nbsp;</i>Mes étapes - {{nbe}} </h5>
+          <h5 class="card-description"> Mails > <a href="{{ path('app_campagne_index') }}">Campagnes</a> > 
+            <code>{{ campagne.name }}</code>
+          </h5>
+        </div>
+        <ul class="app-breadcrumb breadcrumb side">
+          <li>
+            <a type="button" class="btn btn-secondary" href="{{ path('app_campagne_edit', {'id': campagne.id}) }}">
+              Modifier la campagne
+            </a>
+          </li>
+          <li>
+            <a type="button" class="btn btn-primary" href="{{ path('app_etape_new', {'id': campagne.id}) }}">
+              + Créer une étape
+            </a>
+          </li>
+        </ul>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tile">
+                <div class="tile-body">
+                    <div class="table-responsive">
+                        <table style="color:#4b5564" class="table table-hover" id="sampleTable">
+                            <thead>
+                                <tr>
+                                    <th>Envoi d'ordre</th>
+                                    <th>Titre de l'étape</th>
+                                    <th>Délai</th>
+                                    <th>Emails envoyés</th>
+                                    {#<th>Ouvert</th>
+                                    <th>Nb de clics</th>#}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for etape in etapes %}
+                                    <tr>
+                                        <td>{{ etape.ordre }}</td>
+                                        <td>{{ etape.sujet }}</td>
+                                        <td>{{ etape.delai }} {{ etape.temps }}</td>
+                                        <td>{{ etape.emailenvoyes ? etape.emailenvoyes : 0 }}</td>
+                                        {#<td>{{ etape.date ? etape.date|date('Y-m-d') : '' }}</td>
+                                        <td>{{ etape.heure ? etape.heure|date('H:i:s') : '' }}</td>
+                                        <td>
+                                            <a href="{{ path('app_etape_show', {'id': etape.id}) }}">show</a>
+                                            <a href="{{ path('app_etape_edit', {'id': etape.id}) }}">edit</a>
+                                        </td>#}
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="6">
+                                          <div style="margin:10% 25%;">
+                                            <i style="font-size:50px;display:flex;justify-content:center" class="mdi mdi-book-open-variant"></i>
+                                            <h5 style="text-align:center" class=""><em>Il semble que votre écran soit vide !</em></h5>
+                                        </div>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

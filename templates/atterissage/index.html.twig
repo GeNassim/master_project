@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<title>Atterissage index</title>
+
+{% block body %}
+    <h1>Atterissage index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Url</th>
+                <th>Visuel</th>
+                <th>Slug</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for atterissage in atterissages %}
+            <tr>
+                <td>{{ atterissage.id }}</td>
+                <td>{{ atterissage.name }}</td>
+                <td>{{ atterissage.url }}</td>
+                <td>{{ atterissage.visuel }}</td>
+                <td>{{ atterissage.slug }}</td>
+                <td>
+                    <a href="{{ path('app_atterissage_show', {'id': atterissage.id}) }}">show</a>
+                    <a href="{{ path('app_atterissage_edit', {'id': atterissage.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_atterissage_new') }}">Create new</a>
+{% endblock %}

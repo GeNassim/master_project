@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+
+        <title>Smartsystem - </title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Main CSS-->
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/font-awesom.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/jquery-ui.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/gabarit/css/bootstrap.min.css') }}">
+        
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/gabarit/css/datatables.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/gabarit/style.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/gabarit/css/main.css') }}">
+        
+        <!-- Font-icon css-->
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        
+    </head>
+    <body class="app sidebar-mini">
+
+        {% include 'layout/partials/header.html.twig' %}
+
+            <!-- Sidebar menu-->
+            <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+            <aside class="app-sidebar">
+                <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg" alt="User Image">
+                    <div>
+                    <p class="app-sidebar__user-name">John Doe</p>
+                    <p class="app-sidebar__user-designation">Frontend Developer</p>
+                    </div>
+                </div>
+                <ul class="app-menu">
+                    <li><a class="app-menu__item" href="{{path('app_dashboard')}}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
+                    <li class="treeview"><a class="app-menu__item" href="{{path('app_atterissage_index')}}" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">UI Elements</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li><a class="treeview-item" href="bootstrap-components.html"><i class="icon fa fa-circle-o"></i> Bootstrap Elements</a></li>
+                        <li><a class="treeview-item" href="https://fontawesome.com/v4.7.0/icons/" target="_blank" rel="noopener"><i class="icon fa fa-circle-o"></i> Font Icons</a></li>
+                        <li><a class="treeview-item" href="ui-cards.html"><i class="icon fa fa-circle-o"></i> Cards</a></li>
+                        <li><a class="treeview-item" href="widgets.html"><i class="icon fa fa-circle-o"></i> Widgets</a></li>
+                    </ul>
+                    </li>
+                    <li><a class="app-menu__item" href="{{path('app_tunnel_index')}}"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">Tunnels de vente</span></a></li>
+                    <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">Boite aux lettres</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li><a class="treeview-item" href="#"><i class="icon fa fa-circle-o"></i> Newsletters</a></li>
+                            <li><a class="treeview-item" href="{{path('app_campagne_index')}}"><i class="icon fa fa-circle-o"></i> Campagnes</a></li>
+                            <li><a class="treeview-item" href="#"><i class="icon fa fa-circle-o"></i> Statistique des e-mails</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Tables</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li><a class="treeview-item" href="table-basic.html"><i class="icon fa fa-circle-o"></i> Basic Tables</a></li>
+                            <li><a class="treeview-item" href="table-data-table.html"><i class="icon fa fa-circle-o"></i> Data Tables</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">Pages</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li><a class="treeview-item active" href="blank-page.html"><i class="icon fa fa-circle-o"></i> Blank Page</a></li>
+                            <li><a class="treeview-item" href="page-login.html"><i class="icon fa fa-circle-o"></i> Login Page</a></li>
+                            <li><a class="treeview-item" href="page-lockscreen.html"><i class="icon fa fa-circle-o"></i> Lockscreen Page</a></li>
+                            <li><a class="treeview-item" href="page-user.html"><i class="icon fa fa-circle-o"></i> User Page</a></li>
+                            <li><a class="treeview-item" href="page-invoice.html"><i class="icon fa fa-circle-o"></i> Invoice Page</a></li>
+                            <li><a class="treeview-item" href="page-calendar.html"><i class="icon fa fa-circle-o"></i> Calendar Page</a></li>
+                            <li><a class="treeview-item" href="page-mailbox.html"><i class="icon fa fa-circle-o"></i> Mailbox</a></li>
+                            <li><a class="treeview-item" href="page-error.html"><i class="icon fa fa-circle-o"></i> Error Page</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="app-menu__item" href="docs.html"><i class="app-menu__icon fa fa-file-code-o"></i><span class="app-menu__label">Docs</span></a></li>
+                </ul>
+            </aside>
+            <main class="app-content">
+                {% block body %}
+            
+                {% endblock %}
+            </main>
+
+        <!-- Essential javascripts for application to work-->
+        <script src="{{ asset('assets/gabarit/js/jquery-3.3.1.min.js') }}"></script>
+        <script type="text/javascript" src="{{asset('assets/gabarit/js/datatables.min.js')}}"></script>
+        <script type="text/javascript">$('#sampleTable').DataTable();</script>
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+    </body>
+</html>

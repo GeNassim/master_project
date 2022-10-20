@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %} smart system | {% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+
+        <title>Smartsystem - </title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Main CSS-->
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/font-awesome.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/test/mdi/css/materialdesignicons.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/jquery-ui.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/test/css/bootstrap.min.css') }}">
+
+        <link rel="stylesheet" type="text/css" href="{{ asset('node_modules/bootstrap/dist/css/bootstrap.css') }}">
+        
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/gabarit/css/datatables.min.css') }}">
+
+        {#<link rel="stylesheet" type="text/css" href="{{ asset('assets/test/css/datatables.min.css') }}">#}
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/test/css/style.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/gabarit/css/main.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/test/_tabs.css') }}">
+                {#CSS MODIFIER  #}
+                <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/main.css') }}">
+        
+        <!-- Font-icon css-->
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="shortcut icon" href="{{ asset('assets/images/office.PNG') }}" />
+        
+        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        
+    </head>
+    <body class="app sidebar-mini">
+
+        {% include 'layout/partials/header.html.twig' %}
+
+            <!-- Sidebar menu-->
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+            <aside class="app-sidebar">
+                <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="{{ asset('assets/front-office/images/profil.png') }}" width="50px" height="50px" alt="User Image">
+                    <div>
+                    <p class="app-sidebar__user-name">{{ app.user.username }}</p>
+                    <p class="app-sidebar__user-designation">Administrateur</p>
+                    </div>
+                </div>
+                <ul class="app-menu">
+                    <li><a class="app-menu__item" href="{{path('app_dashboard')}}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
+                    <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Contacts</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li><a class="treeview-item" href="#"><i class="icon fa fa-circle-o"></i> Contacts</a></li>
+                            <li><a class="treeview-item" href="{{path('app_tag_index')}}" rel="noopener"><i class="icon fa fa-circle-o"></i> Gérer les tags</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="app-menu__item" href="{{path('app_tunnel_index')}}"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">Tunnels de vente</span></a></li>
+                    <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">Boite aux lettres</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li><a class="treeview-item" href="#"><i class="icon fa fa-circle-o"></i> Newsletters</a></li>
+                            <li><a class="treeview-item" href="{{path('app_campagne_index')}}"><i class="icon fa fa-circle-o"></i> Campagnes</a></li>
+                            <li><a class="treeview-item" href="#"><i class="icon fa fa-circle-o"></i> Statistique des e-mails</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="app-menu__item" href="{{path('app_documentation')}}"><i class="app-menu__icon fa fa-file-code-o"></i><span class="app-menu__label">Documentation</span></a></li>
+                </ul>
+            </aside>
+            {% endif %}
+            <main class="app-content">
+                {% block body %}
+            
+                {% endblock %}
+            </main>
+            
+        <!-- Essential javascripts for application to work-->
+        <script src="{{ asset('assets/gabarit/js/jquery-3.3.1.min.js') }}"></script>
+
+        <script src="{{ asset('assets/js/popper.min.js') }}"></script>
+        <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+        <!-- The javascript plugin to display page loading on top-->
+        <script src="{{ asset('assets/js/jquery-1.12.4.min.js') }}"></script>
+        <script src="{{ asset('assets/js/plugins/pace.min.js') }}"></script>
+        
+        <!-- supprimer un element a partir d'un fenetre modale plugin-->
+        <script src="{{ asset('assets/js/jquery-ui.min.js') }}"></script>
+
+        <script src="{{ asset('assets/js/main.js') }}"></script>
+
+        <script type="text/javascript" src="{{asset('assets/gabarit/js/datatables.min.js')}}"></script>
+        <script type="text/javascript">$('#sampleTable').DataTable();</script>
+        
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+    </body>
+</html>

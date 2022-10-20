@@ -1,0 +1,197 @@
+{% extends "layout/template.html.twig" %}
+
+{% block title %}journal tag & edit{% endblock %}
+
+{% block body %}
+    {%  for message in app.session.flashBag.get('info')  %}
+        <div class="alert alert-info">
+            <strong>Info !</strong> {{message}}.
+        </div>
+    {% endfor %}
+    {%  for message in app.session.flashBag.get('success')  %}
+        <div class="alert alert-success">
+            <strong>{{tagname}} !</strong> {{message}}.
+        </div>
+    {% endfor %}
+    {%  for message in app.session.flashBag.get('error')  %}
+        <div class="alert alert-danger">
+            <strong>Attention !</strong> {{message}}.
+        </div>
+    {% endfor %}
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="product-status-wrap">
+                <div class="row">
+                    <div class="col-6 btn btn-secondary">{{ include('tag/_form.html.twig', {'button_label': 'Modifier le tag'}) }}</div>
+                    <div class="col-6">
+                        <a href="{{ path('app_tag_index') }}">Retourner à la liste</a>
+                        {{ include('tag/_delete_form.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><hr>
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <div class="tile">
+                <h6 class="tile-title">statistique des inscrits</h6>
+                <div class="embed-responsive embed-responsive-16by9">
+                    <canvas class="embed-responsive-item" id="lineChartDemo"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <div class="product-status-wrap">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        
+                            <tr>
+                                <th>Inscrits</th>
+                                <th>Nbre</th>
+                            </tr>
+                        
+                            <tr>
+                                <td>Aujourd'hui</td>
+                                <td>{{jour ? jour : ''}}</td>
+                            </tr>
+                            <tr>
+                                <td>Hier</td>
+                                <td>{{hier}}</td>
+                            </tr>
+                            <tr>
+                                <td>Total</td>
+                                <td>{{total}}</td>
+                            </tr>
+                            <tr>
+                                <td>Desinscrits</td>
+                                <td>?</td>
+                            </tr>
+                        
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="product-status-wrap">
+                <div class="table-responsive">
+                    <h4><code>{{total}}</code> - contacts tagués</h4><hr>
+                    <table class="table table-hover" id="sampleTable">
+                            <thead>
+                                <tr>
+                                    <th>Prenom</th>
+                                    <th>Email</th>
+                                    <th>Landing page</th>
+                                    <th>Inscrit le</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for contact in contacts %}
+                                <tr id="{{ contact.id }}">
+                                    <td>{{ contact.clients.firstname}}</td>
+                                    <td>{{contact.clients.email}}</td>
+                                    <td>{{contact.clients.atterissage.url}}</td>
+                                    <td>{{contact.created|date('d-m-Y')}}</td>
+                                    {#<td>{{ contact.createdAt ? contact.contact.createdAt|date('d-m-Y') : '' }}</td>
+                                    <td><a href="#" data-role="update" data-id="{{ contact.id }}">edit</a></td>#}
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="6">
+                                        <div style="margin:10% 25%;">
+                                            <i style="font-size:50px;display:flex;justify-content:center" class="mdi mdi-book-open-variant"></i>
+                                            <h5 style="text-align:center" class=""><em>Aucun contact pour ce tag !</em></h5>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/test/js/plugins/chart.js') }}"></script>
+
+    <script type="text/javascript">
+      var data = {
+      	labels: ["January", "February", "March", "April", "May"],
+      	datasets: [
+      		{
+      			label: "My First dataset",
+      			fillColor: "rgba(220,220,220,0.2)",
+      			strokeColor: "rgba(220,220,220,1)",
+      			pointColor: "rgba(220,220,220,1)",
+      			pointStrokeColor: "#fff",
+      			pointHighlightFill: "#fff",
+      			pointHighlightStroke: "rgba(220,220,220,1)",
+      			data: [65, 59, 80, 81, 56]
+      		},
+      		{
+      			label: "My Second dataset",
+      			fillColor: "rgba(151,187,205,0.2)",
+      			strokeColor: "rgba(151,187,205,1)",
+      			pointColor: "rgba(151,187,205,1)",
+      			pointStrokeColor: "#fff",
+      			pointHighlightFill: "#fff",
+      			pointHighlightStroke: "rgba(151,187,205,1)",
+      			data: [28, 48, 40, 19, 86]
+      		}
+      	]
+      };
+      var pdata = [
+      	{
+      		value: 300,
+      		color:"#F7464A",
+      		highlight: "#FF5A5E",
+      		label: "Red"
+      	},
+      	{
+      		value: 50,
+      		color: "#46BFBD",
+      		highlight: "#5AD3D1",
+      		label: "Green"
+      	},
+      	{
+      		value: 100,
+      		color: "#FDB45C",
+      		highlight: "#FFC870",
+      		label: "Yellow"
+      	}
+      ]
+      
+      var ctxl = $("#lineChartDemo").get(0).getContext("2d");
+      var lineChart = new Chart(ctxl).Line(data);
+      
+      var ctxb = $("#barChartDemo").get(0).getContext("2d");
+      var barChart = new Chart(ctxb).Bar(data);
+      
+      var ctxr = $("#radarChartDemo").get(0).getContext("2d");
+      var radarChart = new Chart(ctxr).Radar(data);
+      
+      var ctxpo = $("#polarChartDemo").get(0).getContext("2d");
+      var polarChart = new Chart(ctxpo).PolarArea(pdata);
+      
+      var ctxp = $("#pieChartDemo").get(0).getContext("2d");
+      var pieChart = new Chart(ctxp).Pie(pdata);
+      
+      var ctxd = $("#doughnutChartDemo").get(0).getContext("2d");
+      var doughnutChart = new Chart(ctxd).Doughnut(pdata);
+    </script>
+    <!-- Google analytics script-->
+    <script type="text/javascript">
+      if(document.location.hostname == 'pratikborsadiya.in') {
+      	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      	ga('create', 'UA-72504830-1', 'auto');
+      	ga('send', 'pageview');
+      }
+    </script>
+{% endblock %}

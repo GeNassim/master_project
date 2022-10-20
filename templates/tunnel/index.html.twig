@@ -1,0 +1,145 @@
+{% extends 'layout/template.html.twig' %}
+
+{% block title %}Tunnels liste {% endblock %}
+
+{% block body %}
+
+    {%  for message in app.session.flashBag.get('info')  %}
+        <div class="alert alert-info">
+            <strong>Info !</strong> {{message}}.
+        </div>
+    {% endfor %}
+    {%  for message in app.session.flashBag.get('success')  %}
+        <div class="alert alert-success">
+            <strong>{{tunnelname}} !</strong> {{message}}.
+        </div>
+    {% endfor %}
+    {%  for message in app.session.flashBag.get('error')  %}
+        <div class="alert alert-danger">
+            <strong>Attention !</strong> {{message}}.
+        </div>
+    {% endfor %}
+
+    {# --- Registration Modale --- #}
+    <div class="container">
+
+        <!-- The Modal -->
+        <div class="modal fade" id="Registration">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header bg-primary">
+                        <h4 class="modal-title text-white">Créer un nouveau tunnel</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        {{ include('tunnel/_form.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+
+    <div class="breadcome-list">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="breadcomb-wp">
+					<div class="breadcomb-icon">
+						<i class="mdi mdi-book-multiple"></i>
+					</div>
+					<div class="breadcomb-ctn">
+						<h2>Tunnels de vente</h2>
+						<p>Table de tous les tunnels <span class="bread-ntd">active</span></p>
+					</div>
+				</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- The Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+            <div class="modal-content">
+            
+                <!-- Modal Header -->
+                <div class="modal-header">
+                <h4 class="modal-title">Modal Heading</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                
+                <!-- Modal body -->
+                <div class="modal-body">
+                    {#{{ include('tunnel/_form.html.twig', {'button_label': 'Update'}) }}#}
+                </div>
+                
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                <a href="#" id="save" class="btn btn-primary pull right">Save</a>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+                
+            </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="product-status-wrap">
+                <div class="table-responsive">
+                    <h4><code>{{ nb }}</code> - Tunnels</h4>
+                   <div class="add-product">
+                        <a class="nav-link btn btn-success text-white" data-toggle="modal" data-target="#Registration">+ Créer un tunnel</a>
+                    </div><hr>
+                    <table class="table table-hover" id="sampleTable">
+                            <thead>
+                                <tr>
+                                    <th>TITRE</th>
+                                    <th>ACTIVE ?</th>
+                                    <th>DATE DE CREATION</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for tunnel in tunnels %}
+                                <tr id="{{ tunnel.id }}">
+                                    <td data-target="tunnel_name"><a href="{{ path('app_atterissage_edit', {'id': tunnel.id}) }}">{{ tunnel.tunnel.name }}<a></td>
+                                    <td>{{ tunnel.tunnel.active ? '<i style="color:green;font-size:15px" class="mdi mdi-led-variant-on"></i>' : '<i class="mdi mdi-led-variant-off"></i>' }}</td>
+                                    <td>{{ tunnel.tunnel.createdAt ? tunnel.tunnel.createdAt|date('d-m-Y') : '' }}</td>
+                                    {#<td><a href="#" data-role="update" data-id="{{ tunnel.id }}">edit</a></td>#}
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="6">
+                                        <div style="margin:10% 25%;">
+                                            <i style="font-size:50px;display:flex;justify-content:center" class="mdi mdi-book-open-variant"></i>
+                                            <h5 style="text-align:center" class=""><em>Il semble que votre écran soit vide !</em></h5>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(document).ready(function(){
+            $(document).on('click','a[data-role=update]', function(){
+                var id = $(this).data('id');
+                var tunnel_name = $('#'+id).children('td[data-target=tunnel_name]').text();
+
+                $('#tunnel_name').val(tunnel_name);
+                $('#myModal').modal('toggle');
+            })
+        });
+    </script>
+{% endblock %}

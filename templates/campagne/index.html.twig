@@ -1,0 +1,138 @@
+{% extends "layout/template.html.twig" %}
+
+{% block title %}Campagn list{% endblock %}
+
+{% block body %}
+
+    {%  for message in app.session.flashBag.get('info')  %}
+        <div class="alert alert-info">
+            <strong>Info !</strong> {{message}}.
+        </div>
+    {% endfor %}
+    {%  for message in app.session.flashBag.get('success')  %}
+        <div class="alert alert-success">
+            <strong>Succès !</strong> {{message}}.
+        </div>
+    {% endfor %}
+    {%  for message in app.session.flashBag.get('error')  %}
+        <div class="alert alert-danger">
+            <strong>Attention !</strong> {{message}}.
+        </div>
+    {% endfor %}
+
+    {# --- Registration Modale --- #}
+    <div class="container">
+
+        <!-- The Modal -->
+        <div class="modal fade" id="Registration">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header bg-primary">
+                        <h4 class="modal-title text-white">Créer une nouvelle campagne</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        {{ include('campagne/_form.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+
+    {#<div class="breadcome-list">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="breadcomb-wp">
+					<div class="breadcomb-icon">
+						<i class="icon nalika-home"></i>
+					</div>
+					<div class="breadcomb-ctn">
+						<h2>Campagnes</h2>
+						<p>Table de tous les campagnes <span class="bread-ntd">active</span></p>
+					</div>
+				</div>
+            </div>
+        </div>
+    </div>#}
+    <div class="app-title">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="breadcomb-wp">
+					<div class="breadcomb-icon">
+						<i class="icon nalika-home"></i>
+					</div>
+					<div class="breadcomb-ctn">
+						<h2>Campagnes</h2>
+						<p>Table de tous les campagnes <span class="bread-ntd">active</span></p>
+					</div>
+				</div>
+            </div>
+        </div>
+        <ul class="app-breadcrumb breadcrumb">
+            <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+            <li class="breadcrumb-item"><a href="#">Campagnes</a></li>
+        </ul>
+    </div>
+
+    {# Mes campagnes #}
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="product-status-wrap">
+                <div class="table-responsive">
+                    <h4><code>{{ nb }}</code> - Campagnes</h4>
+                    <div class="add-product">
+                        <a class="nav-link btn btn-success text-white" data-toggle="modal" data-target="#Registration">+ Créer</a>
+                    </div><hr>
+                    <table class="table table-hover" id="sampleTable">
+                            <thead>
+                                <tr>
+                                    <th>NOM DE LA CAMPAGNE</th>
+                                    <th>DESCRIPTION</th>
+                                    <th>NOMBRE D'EMAILS</th>
+                                    <th>CREE A</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for campagne in campagnes %}
+                                    <tr id="{{ campagne.id }}">
+                                        <td data-target="campagne_name">
+                                            <h6><a href="{{ path('app_etape_campagne', {'id': campagne.id}) }}">{{ campagne.name }}</a></h6>
+                                            
+                                        </td>
+                                        <td data-target="campagne_desc">{{ campagne.description }}</td>
+                                        <td data-target="campagne_active">{{ campagne.nbemails }}</td>
+                                        <td data-target="campagne_create">{{ campagne.createdAt ? campagne.createdAt|date('Y-m-d') : '' }}</td>
+                                        {#<td>
+                                            <a href="{{ path('app_campagne_del',{id:campagne.id}) }}" class="confirmModal btn btn-danger">
+                                                <i class="mdi mdi-laptop"></i>supp
+                                            </a>
+                                            <a href="{{ path('app_campagne_edit', {'id': campagne.id}) }}">edit</a>
+                                        </td>#}
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="6">
+                                          <div style="margin:10% 25%;">
+                                            <i style="font-size:50px;display:flex;justify-content:center" class="mdi mdi-book-open-variant"></i>
+                                            <h5 style="text-align:center" class=""><em>Aucune enregistrement trouvée !</em></h5>
+                                        </div>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+
+    <script src="{{ asset('assets/test/js/process.js') }}"></script>
+{% endblock %}

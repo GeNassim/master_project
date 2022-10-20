@@ -1,0 +1,19 @@
+{{ form_start(form) }}
+    
+    <div class="form-group">
+        {{ form_row(form.name) }}
+    </div>
+    <div class="form-group">
+        {{ form_row(form.url) }}
+    </div>
+    <div class="form-group">
+        {{ form_row(form.visuel) }}
+    </div>
+    
+    <ul class="post-utility">
+        <li class="likes"><button type="submit" class="btn btn-primary me-2">{{ button_label|default('Enregistrer') }}</button></li>
+        {#<li class="shares"><a class="btn btn-dark" href="#"><i class="fa fa-fw fa-lg fa-share"></i>Copier</a></li>
+        <li class="comments"><button class="btn btn-dark">Visualiser</button></li>
+        <li class="comments"><button class="btn btn-dark">Modifier la page</button></li>#}
+    </ul>
+{{ form_end(form) }}

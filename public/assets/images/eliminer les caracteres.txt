@@ -1,0 +1,44 @@
+$oldDate = "2020-02-27";
+$newDate = new DateTime($oldDate);
+$newDate->add(new DateInterval('P1D')); // P1D means a period of 1 day
+$fomattedDate = $date->format('Y-m-d');
+
+<?php
+$oldDate   = "2020-02-27";
+$date1 = date("Y-m-d", strtotime($oldDate.'+ 1 days'));
+$date2 = date("Y-m-d", strtotime($oldDate.'+ 2 days'));
+?>
+
+//supprimer les espaces
+<?php 
+$searchString = " ";
+$replaceString = "";
+$originalString = "This is a programming tutorial"; 
+ 
+$outputString = str_replace($searchString, $replaceString, $originalString); 
+echo("The original string is: $originalString \n");  
+echo("The string without spaces is: $outputString"); 
+  
+?> 
+
+<?php 
+$searchString = " ";
+$replaceString = "";
+$originalString = "This is a programming tutorial"; 
+ 
+$outputString = str_replace($searchString, $replaceString, $originalString, $count); 
+echo("The original string is: $originalString \n");  
+echo("The string without spaces is: $outputString \n"); 
+echo("The number of replacement operations is: $count");
+  
+?> 
+
+<?php 
+$searchString = " ";
+$replaceString = "";
+$originalString = "This is a programming tutorial"; 
+ 
+$outputString = preg_replace('/\s+/', '', $originalString); 
+echo("The original string is: $originalString \n");  
+echo("The string without spaces is: $outputString \n"); 
+?> 

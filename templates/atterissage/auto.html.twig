@@ -1,0 +1,318 @@
+{% extends 'layout/template.html.twig' %}
+
+{% block title %}Etape d'edition{% endblock %}
+
+{% block body %}
+
+    {%  for message in app.session.flashBag.get('info')  %}
+        <div class="alert alert-info">
+            <strong>Info !</strong> {{message}}.
+        </div>
+    {% endfor %}
+    {%  for message in app.session.flashBag.get('success')  %}
+        <div class="alert alert-success">
+            <strong>Succès !</strong> {{message}}.
+        </div>
+    {% endfor %}
+    {%  for message in app.session.flashBag.get('error')  %}
+        <div class="alert alert-danger">
+            <strong>Attention !</strong> {{message}}.
+        </div>
+    {% endfor %}
+
+    <div class="breadcome-list">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="breadcomb-wp">
+					<div class="breadcomb-icon">
+						<i class="icon nalika-home"></i>
+					</div>
+					<div class="breadcomb-ctn">
+						<h6 style="color:#fff">Paramètres & Règles d'automatisation</h6>
+						<p><a href="{{path('app_tunnel_index')}}">Liste des tunnels de vente ></a> <code class="bread-ntd">{{tunnel}}</code></p>
+					</div>
+				</div>
+            </div>
+        </div>
+    </div>
+
+    {# Ajout des étapes #}
+    <!-- The Modal -->
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                    
+                <!-- Modal Header -->
+                <div class="modal-header card bg-primary text-white">
+                    <h4 class="modal-title">Ajouter une action</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                      
+                <!-- Modal body -->
+                {#{{ form_start(action) }}#}
+                    <div class="modal-body">
+                        <ul>
+                            <li>
+                                S'abonner à la campagne
+                                <p>Inscrire le contact à la campagne</p>
+                            </li>
+                            <li>
+                                Ajouter un tag
+                                <p>Ajouter le tag au contact</p>
+                            </li>
+                            <li>
+                                Envoyer un e-mail
+                                <p>Envoyer un e-mail à un adresse spécifique</p>
+                            </li>
+                        </ul>
+                        <div class="form-group">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <span> S'abonner à la campagne : <em style="color:#555;font-size:12px;margin-bottom:5px">inscrire le contact à la campagne</em> </span>
+                                    <div style="padding:8px 0" style="width:100%">
+                                        {#{{ form_row(action.campagne) }}#}
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <span> S'abonner à la campagne : <em style="color:#555;font-size:12px;margin-bottom:5px">inscrire le contact à la campagne</em> </span>
+                                    <div style="padding:8px 0" style="width:100%">
+                                        {#{{ form_row(action.atterissage) }}#}
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                        
+                <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button class="btn">{{ button_label|default('Save') }}</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                {#{{ form_end(action) }}#}
+                        
+            </div>
+        </div>
+    </div>
+
+    {# Ajouter une page #}
+    <!-- The Modal -->
+    <div class="modal fade" id="newPage">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                    
+                <!-- Modal Header -->
+                <div class="modal-header card bg-primary text-white">
+                    <h4 class="modal-title">Ajouter une Page</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                      
+                <!-- Modal body -->
+                {#{{ form_start(action) }}#}
+                    <div class="modal-body">
+                        <ul>
+                            <li>
+                                <a href="{{ path('app_atterissage_new', {'page': 'Page de remerciement','tunnel': tunnel}) }}">Page de capture</a>
+                            </li>
+                            <li>
+                                <p>Page d'information</p>
+                            </li>
+                            <li>
+                                <p>Page de remerciement</p>
+                            </li>
+                        </ul>
+                    </div>
+                        
+                <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button class="btn">{{ button_label|default('Save') }}</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                {#{{ form_end(action) }}#}
+                        
+            </div>
+        </div>
+    </div>
+            
+    
+    <div class="row user">
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+            <div class="tile p-0">
+                <ul class="nav flex-column nav-tabs user-tabs">
+                    {% for atterissage in atterissages %}
+                        <li class="nav-item"><a class="nav-link active" href="#{{atterissage.url}}" data-toggle="tab">{{atterissage.name}}</a></li>
+                    {% endfor %}
+                    {#<li class="nav-item"><a class="nav-link" href="#user-settings" data-toggle="tab">Page de remerciement</a></li>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newPage">
+                        Ajouter une page
+                    </button>#}
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+            <div class="tab-content">
+                <div class="tab-pane active" id="{{atterissage.url}}">
+                    <div class="tabs">
+                        <div class="tab-2">
+                            <label for="tab2-1"><i class="fa fa-bars"></i>Parametres</label>
+                                <input id="tab2-1" name="tabs-two" type="radio" checked="checked">
+                            <div>
+                               {{ include('atterissage/_form.html.twig', {'button_label': 'Enregister'}) }}
+                            </div>
+                        </div>
+                        <div class="tab-2">
+                            <label for="tab2-2"><i class="fa fa-code"></i>Regle automatisation</label>
+                                <input id="tab2-2" name="tabs-two" type="radio">
+                            <div>
+                                {{ form_start(action, {'attr': {'novalidate':'novalidate'}}) }}
+                                <div class="row">
+                                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                                        <div class="form-group">
+                                            <div class="form-check">
+                                                <label class="form-check-label">
+                                                    <span class="text-primary"> Déclencheur </span>
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <label style="font-size:13px" class="form-check-label">
+                                                    <i class="mdi mdi-arrange-send-backward"></i> Lorsque cet événement se produit
+                                                </label>
+                                            </div>
+                                        </div><hr>
+                                        <div class="form-group">
+                                            <div class="form-check">
+                                                <label class="form-check-label">
+                                                    <span class="text-primary"> inscription sur la page (Optin) </span>
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <label style="font-size:13px" class="form-check-label">
+                                                    <i class="mdi mdi-account-convert"></i> Se produit lorsque quelqu'un s'inscrit sur le formulaire de cette page
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <button class="btn btn-primary">{{ button_label|default('ENREGISTRER LA REGLE') }}</button>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                        <div class="form-group">
+                                            <div class="form-check">
+                                                <label class="form-check-label">
+                                                    <span class="text-primary"> Action </span>
+                                                </label>
+                                            </div>
+                                            <div class="form-check" style="display:flex;aign-items:center;justify-content:space-between">
+                                                <label class="form-check-label">
+                                                    <i class="mdi mdi-arrange-send-backward"></i> Faire ceci
+                                                </label>
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                                                    <i style="color:#fff" class="mdi mdi-arrow-right-bold-hexagon-outline"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-check">
+                                                <label class="form-check-label">
+                                                        {{ form_row(action.campagne) }}
+                                                </label>
+                                            </div>
+                                            {#<div class="form-check">
+                                                <label class="form-check-label">
+                                                        {{ form_row(action.atterissage) }}
+                                                </label>
+                                            </div>#}
+                                            <div class="form-check">
+                                                <label class="form-check-label">
+                                                        {{ form_row(action.tag) }}
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                {{ form_end(action) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="user-settings">
+                  <div class="tile user-settings">
+                    <h4 class="line-head">Settings</h4>
+                    <form>
+                      <div class="row mb-4">
+                        <div class="col-md-4">
+                          <label>First Name</label>
+                          <input class="form-control" type="text">
+                        </div>
+                        <div class="col-md-4">
+                          <label>Last Name</label>
+                          <input class="form-control" type="text">
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-8 mb-4">
+                          <label>Email</label>
+                          <input class="form-control" type="text">
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-md-8 mb-4">
+                          <label>Mobile No</label>
+                          <input class="form-control" type="text">
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-md-8 mb-4">
+                          <label>Office Phone</label>
+                          <input class="form-control" type="text">
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-md-8 mb-4">
+                          <label>Home Phone</label>
+                          <input class="form-control" type="text">
+                        </div>
+                      </div>
+                      <div class="row mb-10">
+                        <div class="col-md-12">
+                          <button class="btn btn-primary" type="button"><i class="fa fa-fw fa-lg fa-check-circle"></i> Save</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+  
+        <!-- Essential javascripts for application to work-->
+        <script src="{{ asset('assets/test/js/popper.min.js') }}"></script>
+
+        <script type="text/javascript">
+            if(document.location.hostname == 'pratikborsadiya.in') {
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+                ga('create', 'UA-72504830-1', 'auto');
+                ga('send', 'pageview');
+            }
+
+            $(document).ready(function(){
+                var i = 1;
+                $('#add').click(function(){
+                    i++;
+                    $('#dynamic field').append('<tr id="row'+i+'"><td><input type="text" name="name[]" class="form-control"/></td><td><button type="button" name="remove" id="'+i+'" vlass="btn btn-danger btn_remove">X</button></td></tr>');
+                });
+
+                $(document).on('click','.btn_remove', function(){
+                    var button_id = $(this).attr("id");
+                    $('#row'+button_id='').remove();
+                });
+            });
+        </script>
+{% endblock %}
