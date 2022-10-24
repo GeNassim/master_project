@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ClientsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ClientsRepository::class)]
@@ -18,7 +19,12 @@ class Clients
     #[ORM\Column(length: 255)]
     private ?string $firstname = null;
 
-    #[ORM\Column(length: 255)]
+    #[
+        ORM\Column(length: 255),
+        Assert\Email(
+            message: "{{ value }} n'est pas valide. Veuillez entrer un e-mail valide"
+        )
+    ]
     private ?string $email = null;
 
     #[ORM\ManyToOne(inversedBy: 'clients')]
